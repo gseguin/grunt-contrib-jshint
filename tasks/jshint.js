@@ -16,6 +16,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('jshint', 'Validate files with JSHint.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options();
+    grunt.config.set('jshint.reporters', options.reporters);
 
     // Read JSHint options from a specified jshintrc file.
     if (options.jshintrc) {
@@ -32,18 +33,19 @@ module.exports = function(grunt) {
       });
       delete options.predef;
     }
-    // Extract globals from options.
-    var globals = options.globals;
-    delete options.globals;
+    // // Extract globals from options.
+    // var globals = options.globals;
+    // delete options.globals;
 
     grunt.verbose.writeflags(options, 'JSHint options');
-    grunt.verbose.writeflags(globals, 'JSHint globals');
+    // grunt.verbose.writeflags(globals, 'JSHint globals');
 
     // Lint specified files.
     var files = this.filesSrc;
-    files.forEach(function(filepath) {
-      jshint.lint(grunt.file.read(filepath), options, globals, filepath);
-    });
+    jshint.hint(files, options);
+    // files.forEach(function(filepath) {
+    //   jshint.lint(grunt.file.read(filepath), options, globals, filepath);
+    // });
 
     // Fail task if errors were logged.
     if (this.errorCount) { return false; }
