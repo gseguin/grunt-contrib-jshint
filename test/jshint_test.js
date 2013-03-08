@@ -8,7 +8,7 @@ exports['jshint'] = function(test) {
   grunt.log.muted = true;
 
   test.doesNotThrow(function() {
-    jshint.lint(grunt.file.read('test/fixtures/lint.txt'));
+    jshint.hint( [ 'test/fixtures/lint.txt' ] );
   }, 'It should not blow up if an error occurs on character 0.');
 
   test.done();
