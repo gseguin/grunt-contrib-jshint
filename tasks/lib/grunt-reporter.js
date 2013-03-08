@@ -5,8 +5,7 @@ exports.init = function( grunt ) {
 
 
 	exports.reporter = function( results, data ){
-		var reporters = grunt.config.get('jshint.reporters') || [ 'default' ],
-            errorCount = 0 ;
+		var reporters = grunt.config.get('jshint.reporters') || [ 'default' ];
 
         results.forEach( function(w) {
             var e = w.error;
@@ -14,15 +13,12 @@ exports.init = function( grunt ) {
             if (!e) { return; }
             var evidence = e.evidence;
             if (evidence) {
--               errorCount++;
+-               grunt.fail.errorcount++;
             }
         });
-        grunt.fail.errorcount = errorCount;
-
 
 		reporters.forEach( function( item ){
             var reporter;
-            grunt.log.debug( 'Current directory: ' + process.cwd() );
             if ( typeof item === 'function' ) {
                 reporter = item;
             } else if ( typeof item === 'string' ) {
